@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://kit.fontawesome.com/82b94cec77.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="feedbackuser.css">
+    
+    
+    <title>Give your feedback</title>
+</head>
+<body>
+    <div class="header">
+        <div class="headerchoices" id="projectName">MyLibrary</div>
+        <a href="feedbackuser.html"><div class="headerchoices">Feadback</div></a>
+        <a href="bookHistoryUser.html"><div class="headerchoices" id="borrowingHistory">Borrowing history</div></a>
+        <a href="main3.html"><div  class="headerchoices" id="books">Books</div></a>
+        
+        <div class="user">
+            <div class="profilIcon">
+                <img class="imagee" id="imagee">
+            </div>
+        <div class="container">
+                <div class="username" id="welcome-message">
+                    
+                </div>
+                <div class="options">
+                    <a href="accountSettings.html"><div class="option">Account</div></a>
+                    
+                  <a href="login.html"><div class="option">Log-out</div></a>
+                </div>
+        </div>
+        
+    </div>
+        
+    </div>
+    <div class="container1">
+
+            <div class="title">FeedBack</div>
+            
+            <div class="feedbackbox">
+                <h3>How satisfied are you with support performance?</h3>
+                <div class="emoji">
+                    <div id="emoji">
+                        <img src="poor.png" >
+                        <img src="bad.png" >
+                        <img src="okay.png" >
+                        <img src="good.png" >
+                        <img src="excellent.png" >
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="input-text">
+                <textarea class="feedback-input" placeholder="Enter your feedback here..."></textarea>
+                <button class="submit-button">Submit Feedback</button>
+            </div>
+        
+    </div>
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+       
+        const userInfo = JSON.parse(localStorage.getItem('loggedInUser ')); 
+
+        console.log(userInfo); 
+    
+        if (userInfo) {
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.textContent = `${userInfo.username}`; 
+        } else {
+            console.log('No user is logged in.'); 
+        }
+    
+       
+        const userProfileData = JSON.parse(localStorage.getItem(`userProfileData_${userInfo.userId}`));
+                const imageElement = document.getElementById("imagee");
+               
+    
+               
+                if (userProfileData && userProfileData.imageUrl) {
+                    imageElement.src = userProfileData.imageUrl; 
+                } else {
+                    imageElement.src = 'path/to/default-image.jpg';
+                }
+    
+    });
+    var stars =document.getElementsByClassName("fas");
+    var emoji =document.getElementById("emoji");
+
+    stars[0].onclick = function(){
+        stars[0].style.color = "#ffd93b";
+        stars[1].style.color = "#e4e4e4";
+        stars[2].style.color = "#e4e4e4";
+        stars[3].style.color = "#e4e4e4";
+        stars[4].style.color = "#e4e4e4";
+        emoji.style.transform = "translateX(0)";
+    }
+    stars[1].onclick = function(){
+        stars[0].style.color = "#ffd93b";
+        stars[1].style.color = "#ffd93b";
+        stars[2].style.color = "#e4e4e4";
+        stars[3].style.color = "#e4e4e4";
+        stars[4].style.color = "#e4e4e4";
+        emoji.style.transform = "translateX(-100px)";
+    }
+    stars[2].onclick = function(){
+        stars[0].style.color = "#ffd93b";
+        stars[1].style.color = "#ffd93b";
+        stars[2].style.color = "#ffd93b";
+        stars[3].style.color = "#e4e4e4";
+        stars[4].style.color = "#e4e4e4";
+        emoji.style.transform = "translateX(-200px)";
+    }
+    stars[3].onclick = function(){
+        stars[0].style.color = "#ffd93b";
+        stars[1].style.color = "#ffd93b";
+        stars[2].style.color = "#ffd93b";
+        stars[3].style.color = "#ffd93b";
+        stars[4].style.color = "#e4e4e4";
+        emoji.style.transform = "translateX(-300px)";
+    }
+    stars[4].onclick = function(){
+        stars[0].style.color = "#ffd93b";
+        stars[1].style.color = "#ffd93b";
+        stars[2].style.color = "#ffd93b";
+        stars[3].style.color = "#ffd93b";
+        stars[4].style.color = "#ffd93b";
+        emoji.style.transform = "translateX(-400px)";
+    }
+    var submitButton = document.querySelector('.submit-button');
+var feedbackInput = document.querySelector('.feedback-input');
+
+
+submitButton.addEventListener('click', function() {
+  
+    var rating = getRating();
+    var feedback = feedbackInput.value;
+
+    var loggedInUser   = JSON.parse(localStorage.getItem('loggedInUser '));
+const userProfileData = JSON.parse(localStorage.getItem(`userProfileData_${loggedInUser.userId}`));
+
+
+var feedbackObject = {
+    username: loggedInUser.username,
+    userId: loggedInUser.userId,
+    rating: rating,
+    feedback: feedback,
+    image: userProfileData && userProfileData.imageUrl ? userProfileData.imageUrl : ''
+};
+
+   
+    var existingFeedback = JSON.parse(localStorage.getItem('feedback')) || [];
+
+    
+    existingFeedback.push(feedbackObject);
+
+    
+    localStorage.setItem('feedback', JSON.stringify(existingFeedback));
+
+   
+    feedbackInput.value = '';
+
+    alert('Feedback submitted successfully!');
+});
+
+
+function getRating() {
+    var stars = document.getElementsByClassName("fas");
+    var rating = 0;
+
+    for (var i = 0; i < stars.length; i++) {
+        if (stars[i].style.color === "rgb(255, 217, 59)") {
+            rating = i + 1;
+        }
+    }
+
+    return rating;
+}
+   </script> 
+    
+</body>
+</html>

@@ -1,0 +1,227 @@
+
+body{
+    display: flex;
+    background-color: #f4f4f4;
+    margin-top: 0%;
+  
+}
+.header{
+    width: 100%;
+    height: 40px;
+    margin-top: 0px;
+    margin-top: 0px;
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+   backdrop-filter: blur(30px);
+   box-shadow:0px 0px 30px rgba(227, 228, 237, 0.37);
+   border: 2px solid rgba(255, 255, 255, 0.18); 
+    position: fixed; 
+    z-index: 1000;
+}
+
+.headerchoices{
+    width: 280px;
+    height:40px;
+    color: black;
+    margin: 0px;
+    text-align: center;
+    align-content: center;
+    font-size: larger;
+    font-weight: bolder;
+    display: inline-block;
+    cursor: pointer;
+}
+.headerchoices:hover{
+    color:red;
+}
+#projectName{
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+}
+#projectName:hover{
+    color: black;
+}
+
+
+
+.user{
+    width: 200px;
+    height: 40px;
+    display: flex; 
+    justify-content: space-between; 
+    margin-right: 30px;
+    border: none;
+}
+.username{
+    width: 150px;
+    height: 40px;
+    margin-right: 40px;
+    white-space: nowrap; 
+    text-overflow: hidden;
+    align-content:center ;
+    margin-left: 5px;
+    color: black;
+    font-weight: bold;
+    
+           
+}
+.container{
+    
+    display: flex; 
+    flex-direction: column; 
+    width: 130px; 
+    
+    padding: 10px; 
+    position: relative; 
+    
+    
+    
+}
+.options {
+    display: none; 
+    position: absolute; 
+    width: 160px;
+    top: 100%; 
+    left: 0;
+    background-color: white; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; 
+    color: black;
+    font-weight: bolder;
+    text-align: center;
+    
+    
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.container:hover .options {
+    display: block; 
+    
+}
+.option {
+    padding: 10px; 
+    cursor: pointer; 
+}
+.option:hover {
+    background-color: #f0f0f0; 
+    color: red;
+}
+.profilIcon{
+    width: 50px;
+    height:40px;
+    align-items: center;
+    align-content: center;
+    margin-right: 10px;
+    overflow: hidden;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    object-fit: cover;
+    
+}
+#imagee{
+    width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+}
+
+
+.container1{
+    width: 700px;
+    height: auto;
+    margin-top: 50px;
+    margin-left: 300px;
+    background-color: white;
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.title {
+    font-size: 25px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+.feedbackbox{
+
+    background-color: #ffff;
+    padding: 20px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.emoji{
+    width:100px ;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.emoji img{
+    width: 80px;
+    margin: 0 10px;
+}
+#emoji{
+    display: flex;
+    align-items: center;
+    transform: translateX(-400px);
+    transition: 0.3s;
+    
+}
+.rating .fas{
+    font-size: 40px;
+    color: #e4e4e4;
+    cursor: pointer;
+}
+.feedback-text{
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+}
+
+.feedback-input {
+    width: 90%;
+    height: 150px;
+    padding: 10px;
+    margin-left: 25px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.feedback-input:focus {
+    border-color: #aaa;
+    outline: none;
+}
+
+.submit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 40%;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #3e8e41;
+}

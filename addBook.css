@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+   
+    
+}
+.header {
+    background-color: #007BFF;
+    height: 15px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header img {
+    height: 50px; 
+}
+.header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.header a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.picture {
+    flex: 1;
+    background: #eaeaea; 
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    margin-right: 20px;
+    display: flex;
+    overflow: hidden;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+.picture img {
+    width: 100%;
+    height: auto;
+}
+
+.info {
+    flex: 2;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.bookinfo {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.bookinput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.radio-group {
+    margin-bottom: 15px;
+}
+
+.radio-group input {
+    margin-right: 5px;
+}
+
+.add {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add:hover {
+    background-color: #218838;
+}

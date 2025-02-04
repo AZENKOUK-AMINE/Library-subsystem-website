@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 20px;
+        }
+        .header img {
+            height: 50px; 
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header1 h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .feedback-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+        }
+        .feedback-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .feedback-container .text-container {
+            flex: 1;
+        }
+        .feedback-container .text-container p {
+            margin: 5px 0;
+        }
+        .feedback-container .text-container .username {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .feedback-container .text-container .user-id {
+            color: #666;
+        }
+        .feedback-container .text-container .rating {
+            color: #ffc107;
+        }
+        .feedback-container .text-container .feedback-text {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+    <div class="container">
+        <div class="header1">
+            <h1>Admin Panel - Feedbacks</h1>
+        </div>
+        <div id="admin-panel"></div>
+    </div>
+    <script>
+        var feedbackData = JSON.parse(localStorage.getItem('feedback'));
+        feedbackData.forEach(function(feedback) {
+            var feedbackContainer = document.createElement('div');
+            feedbackContainer.classList.add('feedback-container');
+
+            
+
+            var userImage = document.createElement('img');
+            userImage.classList.add('image');
+            userImage.alt = feedback.username;
+            userImage.src = feedback.image;
+
+       
+            var textContainer = document.createElement('div');
+            textContainer.classList.add('text-container');
+
+
+            var usernameElement = document.createElement('p');
+            usernameElement.classList.add('username');
+            usernameElement.textContent = feedback.username;
+
+            var userIdElement = document.createElement('p');
+            userIdElement.classList.add('user-id');
+            userIdElement.textContent = 'User  ID: ' + feedback.userId;
+
+            var ratingElement = document.createElement('p');
+            ratingElement.classList.add('rating');
+            ratingElement.textContent = 'Rating: ' + feedback.rating;
+
+            var feedbackTextElement = document.createElement('p');
+            feedbackTextElement.classList.add('feedback-text');
+            feedbackTextElement.textContent = feedback.feedback;
+
+            
+            textContainer.appendChild(usernameElement);
+            textContainer.appendChild(userIdElement);
+            textContainer.appendChild(ratingElement);
+            textContainer.appendChild(feedbackTextElement);
+
+            
+            feedbackContainer.appendChild(userImage);
+            feedbackContainer.appendChild(textContainer);
+
+       
+            document.getElementById('admin-panel').appendChild(feedbackContainer);
+        });
+    </script>
+</body>
+</html>

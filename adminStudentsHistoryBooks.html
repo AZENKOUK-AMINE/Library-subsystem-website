@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserved Books</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            height: 50px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            height: 50px; 
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .search-container {
+            width: 100%;
+            margin-bottom: 20px; 
+            display: flex;
+            justify-content: center;
+            height: 40px;
+            
+        }
+        .search-bar {
+            padding: 10px; 
+            width: 80%;
+            max-width: 400px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            margin-top: 10px;
+            
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search..." onkeyup="filterTable()">
+    </div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-6 text-center">Reserved Books</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left">Book Image</th>
+                        <th class="py-3 px-4 text-left">Title</th>
+                        <th class="py-3 px-4 text-left">Author</th>
+                        <th class="py-3 px-4 text-left">Start Time</th>
+                        <th class="py-3 px-4 text-left">End Time</th>
+                        <th class="py-3 px-4 text-left">User Name</th>
+                        <th class="py-3 px-4 text-left">User ID</th>
+                    </tr>
+                </thead>
+                <tbody id="reservedBooksTableBody">
+            
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function loadReservedBooks() {
+            const reservedBooks = JSON.parse(localStorage.getItem('reservedBooks')) || [];
+            const tableBody = document.querySelector('#reservedBooksTableBody');
+        
+            const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser '));
+        
+            if (reservedBooks.length > 0) {
+                reservedBooks.forEach(book => {
+                    const row = document.createElement('tr');
+                    row.classList.add('border-b');
+                    row.innerHTML = `
+                        <td class="py-3 px-4"><img src="${book.image}" alt="Cover image of the book titled ${book.title}" class="w-12 h-16 object-cover"></td>
+                        <td class="py-3 px-4">${book.title}</td>
+                        <td class="py-3 px-4">${book.author}</td>
+                        <td class="py-3 px-4">${book.startTime}</td>
+                        <td class="py-3 px-4">${book.endTime}</td>
+                        <td class="py-3 px-4">${book.studentName ? book.studentName : 'Unknown'}</td>
+                        <td class="py-3 px-4">${book.studentId ? book.studentId : 'Unknown'}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="7" class="py-3 px-4 text-center">No reserved books found.</td>`;
+                tableBody.appendChild(row);
+            }
+        }
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const booksDataList = document.getElementById('reservedBooksTableBody');
+            const rows = booksDataList.getElementsByTagName('tr');
+        
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let rowContainsFilter = false;
+        
+                // Check each cell in the row for a match
+                for (let j = 0; j < cells.length; j++) {
+                    const cell = cells[j];
+                    if (cell) {
+                        const cellText = cell.textContent || cell.innerText;
+                        if (cellText.toLowerCase().indexOf(filter) > -1) {
+                            rowContainsFilter = true;
+                            break; // No need to check further cells
+                        }
+                    }
+                }
+        
+                // Show or hide the row based on the filter
+                if (rowContainsFilter) {
+                    rows[i].style.display = ""; // Show the row
+                } else {
+                    rows[i].style.display = "none"; // Hide the row
+                }
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadReservedBooks);
+    </script>
+</body>
+</html>

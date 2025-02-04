@@ -1,0 +1,60 @@
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(161, 156, 167);
+    border-radius: 10px;
+    opacity: 0.5;
+}
+.welecom{
+    width: 100%;
+    height: 50px;
+    background-color:rgba(13, 223, 48, 0.966);
+    border-radius: 10px;
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 0.5px;
+
+}
+.services{
+    width: 100%;
+    height: 700px;
+    
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 5px;
+}
+.service{
+    width: 400px;
+    height: 250px;
+ 
+    border: 1px solid black;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+.service:hover{
+    box-shadow: 1px 1px 10px 1px black;
+}
+.serviceTitle{
+    font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+h2{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.952);
+}
+.button1{
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    margin-top: 35px;
+    border: 0;
+    cursor: pointer;
+}
+.button1:hover{
+    width: 160px ;
+}

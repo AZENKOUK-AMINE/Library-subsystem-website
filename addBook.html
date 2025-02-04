@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <Link rel="stylesheet" href="addBook.css" >
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+    <div class="container">
+        <div class="picture" id="picture"></div>
+        <div class="info">
+            <h2>Book Information</h2>
+            <label for="title" class="bookinfo">Title:</label>
+            <input type="text" class="bookinput" id="title" placeholder="Enter book title"><br>
+
+            <label for="type" class="bookinfo">Type:</label>
+            <input type="text" class="bookinput" id="type" placeholder="Enter book type"><br>
+
+            <label for="author" class="bookinfo">Author:</label>
+            <input type="text" class="bookinput" id="author" placeholder="Enter author's name"><br>
+
+            <label for="description" class="bookinfo">Description:</label>
+            <textarea class="bookinput" id="description" placeholder="Enter book description"></textarea><br>
+
+            <label class="bookinfo">Book provided to:</label>
+            <div class="radio-group">
+                <input type="radio" name="providedTo" id="teacher" value="Teacher">
+                <label for="teacher">Teacher</label>
+                <input type="radio" name="providedTo" id="students" value="Students">
+                <label for="students">Students</label>
+                <input type="radio" name="providedTo" id="both" value="Both">
+                <label for="both">Both</label>
+            </div>
+
+            <label for="image" class="bookinfo">Upload Picture:</label>
+            <input type="file" class="bookinput" id="image" accept="image/*"><br>
+
+            <button class="add" id="addbtn">Add</button>
+        </div>
+    </div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+
+        if (bookId) {
+            const books = JSON.parse(localStorage.getItem('books')) || [];
+            const book = books[bookId];
+            
+            if (book) {
+                document.getElementById('title').value = book.title;
+                document.getElementById('author').value = book.author;
+                document.getElementById('type').value = book.type;
+                document.getElementById('description').value = book.description;
+                document.getElementById('picture').style.backgroundImage = 'url(' + book.image + ')';
+                
+                document.getElementById('addbtn').innerText='Update';
+            }
+            else {
+                console.error('No books found in local storage');
+              }
+        }
+
+        document.getElementById('addbtn').addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const type = document.getElementById('type').value;
+            const description = document.getElementById('description').value;
+            const dateAdded = new Date().toLocaleString();
+            const imageFile = document.getElementById('image').files[0];
+
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const book = {
+                    title,
+                    author,
+                    type,
+                    description,
+                    dateAdded,
+                    image: reader.result 
+                };
+
+                let books = JSON.parse(localStorage.getItem('books')) || [];
+
+                if (bookId) {
+                  
+                    books[bookId] = book;
+                } else {
+                    
+                    books.push(book);
+                }
+
+                localStorage.setItem('books', JSON.stringify(books)); 
+
+                alert('Book saved successfully!');
+                window.location.href = 'bookhistory.html'; 
+            };
+
+            if (imageFile) {
+                reader.readAsDataURL(imageFile); 
+            } else {
+                alert('Please select an image file.');
+            }
+        });
+        document.getElementById('image').addEventListener('change', function(event) {
+            const pictureDiv = document.getElementById('picture');
+            const file = event.target.files[0];
+        
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    pictureDiv.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = e.target.result; 
+                    img.alt = 'Uploaded Image'; 
+                    pictureDiv.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        function isQuotaExceededError(err) {
+            return (
+              err instanceof DOMException &&
+              (err.code === 22 || err.code === 1014 || err.name === "QuotaExceededError" || err.name === "NS_ERROR_DOM_QUOTA_REACHED")
+            );
+          }
+        
+</script>
+</body>
+</html>
+    

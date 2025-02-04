@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            height: 50px; 
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .welcome {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .welcome h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .services {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        @media (min-width: 768px) {
+            .services {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 1024px) {
+            .services {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        .service {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .service h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .service h2 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .button1 {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button1:hover {
+            opacity: 0.9;
+        }
+        .button1.blue {
+            background-color: #007BFF;
+        }
+        .button1.green {
+            background-color: #28a745;
+        }
+        .button1.red {
+            background-color: #dc3545;
+        }
+        .button1.yellow {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+    <div class="welcome">
+        <h1>Welcome in the Admin page </h1>
+    </div>
+    <div class="services">
+        <div id="serviceAddBook" class="service">
+            <h1 class="serviceTitle">Add a Book</h1>
+            <h2>Press the button below to go to books page</h2>
+            <a href="addBook.html">
+                <button class="button1 blue">Go there</button>
+            </a>
+        </div>
+        <div id="serviceHistoryOfbooks" class="service">
+            <h1 class="serviceTitle">Books History</h1>
+            <h2>Press the button below to go to Books History page</h2>
+            <a href="bookHistory.html">
+                <button class="button1 green">Go there</button>
+            </a>
+        </div>
+        <div id="serviceStudentsBorrowing" class="service">
+            <h1 class="serviceTitle">Users Borrowing History</h1>
+            <h2>Press the button below to go to Students Borrowing History page</h2>
+            <a href="adminStudentsHistoryBooks.html">
+                <button class="button1 yellow">Go there</button>
+            </a>
+        </div>
+        <div id="serviceStatistics" class="service">
+            <h1 class="serviceTitle">Users Data</h1>
+            <h2>Press the button below to go to Statistics page</h2>
+            <a href="usersData.html">
+                <button class="button1 blue">Go there</button>
+            </a>
+        </div>
+        <div id="serviceSubmittedFeedBacks" class="service">
+            <h1 class="serviceTitle">submittedFeedBacks</h1>
+            <h2>Press the button below to go to Outstock books page</h2>
+            <a href="submittedFeedBacks.html">
+            <button class="button1 red">Go there</button>
+             </a>
+        </div>
+    </div>
+    <script src="Adminmain.js">
+       
+    </script>
+</body>
+</html>

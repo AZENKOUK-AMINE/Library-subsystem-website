@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main3.css">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            align-items: center;
+        }
+        .header{
+            width: 100%;
+            height: 40px;
+            margin-top: 0px;
+            margin-top: 0px;
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+           backdrop-filter: blur(30px);
+           box-shadow:0px 0px 30px rgba(227, 228, 237, 0.37);
+           border: 2px solid rgba(255, 255, 255, 0.18); 
+           position: fixed; 
+           z-index: 1000;
+        }
+        
+        .headerchoices{
+            width: 280px;
+            height:40px;
+            color: black;
+            margin: 0px;
+            text-align: center;
+            align-content: center;
+            font-size: larger;
+            font-weight: bolder;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .headerchoices:hover{
+            color:red;
+        }
+        #projectName{
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 10px;
+        }
+        #projectName:hover{
+            color: black;
+        }
+        .user{
+            width: 200px;
+            height: 40px;
+            display: flex; 
+            justify-content: space-between; 
+            margin-right: 30px;
+            border: none;
+        }
+        .username{
+            width: 150px;
+            height: 40px;
+            margin-right: 40px;
+            white-space: nowrap; 
+            text-overflow: hidden;
+            align-content:center ;
+            margin-left: 5px;
+            color: black;
+            font-weight: bold;
+            
+                   
+        }
+        .container{
+            
+            display: flex; 
+            flex-direction: column; 
+            width: 130px; 
+            
+            padding: 10px; 
+            position: relative; 
+            
+            
+            
+        }
+        .options {
+            display: none; 
+            flex-direction: column;
+            position: absolute; 
+            top: 100%; 
+            left: 0;
+            background-color: white; 
+            border: 1px solid #ccc; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000; 
+            color: black;
+            font-weight: bolder;
+            text-align: center;
+            
+            
+        }
+        .container:hover .options {
+            display: block; 
+            
+        }
+        .option {
+            padding: 10px; 
+            cursor: pointer; 
+        }
+        .option:hover {
+            color: red;
+        }
+        .profilIcon{
+            width: 50px;
+            height:40px;
+            align-items: center;
+            align-content: center;
+            margin-right: 10px;
+            overflow: hidden;
+            font-size: 20px;
+            border-radius: 50%;
+            background-color: white;
+            text-align: center;
+            object-fit: cover;
+            
+        }
+        #imagee{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .containertable {
+            width: 1000px;
+            margin: 50px auto; 
+            padding: 20px; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+        }
+        th, td {
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            text-align: left; 
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th.actions {
+            visibility: hidden;
+            border: none;
+            height: 0; 
+            padding: 0; 
+        }
+        #updateReservation,#cancelReservation{
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 40px;
+            
+        }
+        #cancelReservation{
+            background-color: rgba(255, 0, 0, 0.938);
+            
+        }
+        #updateReservation:hover {
+            background-color: #218838;
+            box-shadow: 1px 1px 10px 0px black;
+        }
+        #cancelReservation:hover{
+            background-color:red ;
+            box-shadow: 1px 1px 10px 0px black;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="headerchoices" id="projectName">MyLibrary</div>
+        <a href="feedbackuser.html"><div class="headerchoices">Feedback</div></a>
+        <a href="bookHistoryUser.html"><div class="headerchoices" id="borrowingHistory">Borrowing history</div></a>
+        <a href="main3.html"><div class="headerchoices" id="books">Books</div></a>
+        <div class="user">
+            <div class="profilIcon">
+                <img class="imagee" id="imagee">
+            </div>
+            <div class="container">
+                <div class="username" id="welcome-message"></div>
+                <div class="options">
+                    <a href="accountSettings.html"><div class="option">Account</div></a>
+                    <a href="login.html"><div class="option">Log-out</div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="containertable">
+        <h1>Borrowing Books History</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th> 
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Starting Time</th>
+                    <th>Ending Time</th>
+                    <th class="actions" >Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bookList"></tbody>
+        </table>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userInfo = JSON.parse(localStorage.getItem('loggedInUser '));
+            
+            if (userInfo) {
+                const welcomeMessage = document.getElementById('welcome-message');
+                welcomeMessage.textContent = `${userInfo.username}`; 
+            } else {
+                console.log('No user is logged in.');
+            }
+            const userProfileData = JSON.parse(localStorage.getItem(`userProfileData_${userInfo.userId}`));
+            const imageElement = document.getElementById("imagee");
+           
+
+           
+            if (userProfileData && userProfileData.imageUrl) {
+                imageElement.src = userProfileData.imageUrl; 
+            } else {
+                imageElement.src = 'path/to/default-image.jpg';
+            }
+    
+            const reservedBooks = JSON.parse(localStorage.getItem('reservedBooks')) || [];
+            const userReservedBooks = reservedBooks.filter(book => book.studentName === userInfo.username);
+            
+            const bookList = document.getElementById('bookList');
+            userReservedBooks.forEach((book) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${book.image}" alt="${book.title}" style="width: 50px; height: auto;"></td>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.startTime || 'N/A'}</td>
+                    <td>${book.endTime || 'N/A'}</td>
+                    <td>
+                        <button onclick="cancelReservation('${book.title}')" id="cancelReservation">Cancel</button>
+                        <button onclick="updateReservation('${book.title}')" id="updateReservation">Update</button>
+                    </td>
+                `;
+                bookList.appendChild(row);
+            });
+        });
+    
+        function cancelReservation(title) {
+            let reservedBooks = JSON.parse(localStorage.getItem('reservedBooks')) || []; 
+            reservedBooks = reservedBooks.filter(book => book.title !== title);
+            localStorage.setItem('reservedBooks', JSON.stringify(reservedBooks)); 
+            location.reload(); 
+        }
+    
+        function updateReservation(title) {
+            const reservedBooks = JSON.parse(localStorage.getItem('reservedBooks')) || [];
+            const bookToUpdate = reservedBooks.find(book => book.title === title);
+    
+    if (bookToUpdate) {
+        const startTime = bookToUpdate.startTime;
+        const endTime = bookToUpdate.endTime;
+        window.location.href = `book_details.html?title=${encodeURIComponent(title)}&startTime=${encodeURIComponent(startTime)}&endTime=${encodeURIComponent(endTime)}`;
+    }
+        }
+    </script>
+</body>
+</html>

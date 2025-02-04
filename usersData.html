@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            height: 15px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            height: 50px; 
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+        .user-list {
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: 200px;
+            margin-right: auto;
+            
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            
+        }
+        th, td {
+            
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+           
+            background-color: #f2f2f2;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s;
+            
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        input[type="text"], select {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus, select:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+        
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100px;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #218838;
+        }
+        .button1{
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100px;
+            transition: background-color 0.3s;
+        }
+        .button1:hover{
+            background-color: blue;
+        }
+        
+        #openModal{
+            width: 100%;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .actions {
+         
+            
+            justify-content: flex-start;
+            width: 250px;
+            height: 50px;
+            display: flex;
+        }
+        .search-container {
+            width: 100%;
+            margin-bottom: 20px; 
+            display: flex;
+            justify-content: center;
+            
+        }
+        .search-bar {
+            padding: 10px; 
+            width: 80%;
+            max-width: 400px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            
+            
+        }
+        
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #delete1{
+            background-color: rgba(255, 0, 0, 0.808);
+        }
+        #delete1:hover{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+
+    <h1>User Data</h1>
+    <button class="button1" id="openModal">Add User</button>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search..." onkeyup="filterTable()">
+    </div>
+
+    <div class="user-list">
+        <h2>Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Passport ID</th>
+                    <th>Class</th>
+                    <th>Type</th>
+                    <th>Gender</th>
+                    <th>Password</th>
+                    <th class="actions">Actions </tr>
+                    
+                </tr>
+            </thead>
+            <tbody id="userDataList"></tbody>
+        </table>
+    </div>
+
+    
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add User</h2>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="id" placeholder="ID" required>
+            <input type="text" id="passportId" placeholder="Passport ID" required>
+            <input type="text" id="class" placeholder="Class" required>
+            <select id="type">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
+            </select>
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <button class="button" id="addUser ">Add User</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openModal').onclick = function () {
+            document.getElementById('userModal').style.display = 'block';
+        };
+        
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('userModal').style.display = 'none';
+        };
+        
+        window.onclick = function (event) {
+            const modal = document.getElementById('userModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+        
+        let currentUser_Index = null; 
+        
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userDataList = document.getElementById('userDataList');
+            userDataList.innerHTML = ''; 
+        
+            users.forEach((user, index) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.id}</td>
+                    <td>${user.passportId}</td>
+                    <td>${user.class}</td>
+                    <td>${user.type}</td>
+                    <td>${user.gender}</td>
+                    <td>${user.password}</td>
+                    
+                    <td>
+                        <button class="button" onclick="editUser (${index})">Update</button>
+                        <button class="button" id="delete1" onclick="deleteUser (${index})">Delete</button>
+                    </td>
+                `;
+                userDataList.appendChild(newRow);
+            });
+        }
+        
+        document.getElementById('addUser ').onclick = function () {
+            const name = document.getElementById('name').value.trim();
+            const id = document.getElementById('id').value.trim();
+            const passportId = document.getElementById('passportId').value.trim();
+            const classValue = document.getElementById('class').value.trim();
+            const type = document.getElementById('type').value;
+            const gender = document.getElementById('gender').value;
+            const defaultPassword = '123456789'; 
+         
+            
+        
+            if (name && id && passportId && classValue) {
+                const user = { name, id, passportId, class: classValue, type,gender, password: defaultPassword };
+        
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                if (currentUser_Index !== null) {
+                 
+                    users[currentUser_Index] = user;
+                    currentUser_Index = null; 
+                } else {
+                   
+                    users.push(user);
+                }
+        
+                localStorage.setItem('users', JSON.stringify(users));
+                loadUsers();
+        
+               
+                clearInputFields();
+                document.getElementById('userModal').style.display = 'none';
+            } else {
+                alert("Please fill in all fields.");
+            }
+        };
+        
+        function deleteUser (index) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.splice(index, 1); 
+            localStorage.setItem('users', JSON.stringify(users));
+            loadUsers();
+        }
+        
+        function editUser (index) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users[index];
+        
+         
+            document.getElementById('name').value = user.name;
+            document.getElementById('id').value = user.id;
+            document.getElementById('passportId').value = user.passportId;
+            document.getElementById('class').value = user.class;
+            document.getElementById('type').value = user.type;
+        
+            currentUser_Index = index;
+            document.getElementById('userModal').style.display = 'block';
+            document.getElementById('addUser ').textContent = 'Update ';
+        }
+        
+        function clearInputFields() {
+            document.getElementById('name').value = '';
+            document.getElementById('id').value = '';
+            document.getElementById('passportId').value = '';
+            document.getElementById('class').value = '';
+            document.getElementById('type').value = 'student';
+        }
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const userDataList = document.getElementById('userDataList');
+            const rows = userDataList.getElementsByTagName('tr');
+        
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let rowContainsFilter = false;
+        
+                
+                for (let j = 0; j < cells.length; j++) {
+                    const cell = cells[j];
+                    if (cell) {
+                        const cellText = cell.textContent || cell.innerText;
+                        if (cellText.toLowerCase().indexOf(filter) > -1) {
+                            rowContainsFilter = true;
+                            break; 
+                        }
+                    }
+                }
+        
+                
+                if (rowContainsFilter) {
+                    rows[i].style.display = ""; 
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+        
+        window.onload = loadUsers;
+    </script>
+</body>
+</html>

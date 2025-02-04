@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+        .header img {
+            height: 50px; 
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .search-container {
+            width: 100%;
+            margin-bottom: 20px; 
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            height: 40px;
+            
+        }
+        .search-bar {
+            padding: 10px; 
+            width: 80%;
+            max-width: 400px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            
+            
+        }
+        td {
+            width: 100px;
+            max-height: 10px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="header">
+        <img src="adminicon.jpg" alt="Logo">
+        <a href="adminmain.html">Home</a> 
+    </div>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search..." onkeyup="filterTable()">
+    </div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-6 text-center">Book History</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left">Title</th>
+                        <th class="py-3 px-4 text-left">Author</th>
+                        <th class="py-3 px-4 text-left">Type</th>
+                        <th class="py-3 px-4 text-left" id="desc">Description</th>
+                        <th class="py-3 px-4 text-left">Image</th>
+                        <th class="py-3 px-4 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList" class="divide-y divide-gray-200">
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function loadBooks() {
+            const books = JSON.parse(localStorage.getItem('books')) || [];
+            const bookList = document.getElementById('bookList');
+            bookList.innerHTML = '';
+
+            books.forEach((book, index) => {
+                const row = document.createElement('tr');
+                row.classList.add('border-b');
+                row.innerHTML = `
+                    <td class="py-3 px-4">${book.title}</td>
+                    <td class="py-3 px-4">${book.author}</td>
+                    <td class="py-3 px-4">${book.type}</td>
+                    <td class="py-3 px-4">${book.description}</td>
+                    <td class="py-3 px-4"><img src="${book.image}" alt="Cover image of the book titled ${book.title}" class="w-12 h-16 object-cover"></td>
+                    <td class="py-3 px-4">
+                        <button class="update bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700 shadow-md" onclick="edit(${index})">Update</button>
+                        <button class="remove bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 shadow-md" onclick="remove(${index})">Remove</button>
+                    </td>
+                `;
+                bookList.appendChild(row);
+            });
+        }
+
+        function edit(index) {
+            const books = JSON.parse(localStorage.getItem('books')) || [];
+            const book = books[index];
+          
+            
+            const url = `addBook.html?id=${index}`;
+          
+           
+            window.location.href = url;
+        }
+
+        function remove(index) {
+            const books = JSON.parse(localStorage.getItem('books')) || [];
+            books.splice(index, 1);
+            localStorage.setItem('books', JSON.stringify(books));
+            loadBooks();
+        }
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const bookDataList = document.getElementById('bookList');
+            const rows = bookDataList.getElementsByTagName('tr');
+        
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let rowContainsFilter = false;
+                for (let j = 0; j < cells.length; j++) {
+                    const cell = cells[j];
+                    if (cell) {
+                        const cellText = cell.textContent || cell.innerText;
+                        if (cellText.toLowerCase().indexOf(filter) > -1) {
+                            rowContainsFilter = true;
+                            break; 
+                        }
+                    }
+                }
+        
+                if (rowContainsFilter) {
+                    rows[i].style.display = ""; 
+                } else {
+                    rows[i].style.display = "none"; 
+                }
+            }
+        }
+        window.onload = loadBooks;
+    </script>
+</body>
+</html>

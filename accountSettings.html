@@ -1,0 +1,509 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   User Profile
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   body {
+            background-color: #fdfdfd;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .header {
+            width: 100%;
+            height: 40px;
+            background-color: white;
+            box-shadow: 0px 0px 30px rgba(227, 228, 237, 0.37);
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            position: fixed;
+            z-index: 1000;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 10px;
+           
+        }
+        .header .headerchoices {
+            color: black;
+            font-size: larger;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            align-items: center;
+        }
+        a{
+            text-decoration: none;
+        }
+        .header .headerchoices:hover {
+            color: red;
+        }
+        .header .user {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .header .user .profilIcon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .header .user .container {
+            position: relative;
+        }
+        .header .user .container .options {
+           width: 150px;
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
+        .header .user .container:hover .options {
+            display: inline-block;
+        }
+        .header .user .container .option {
+            padding: 10px;
+            cursor: pointer;
+            display: block;
+        }
+        .header .user .container .option:hover {
+            background-color: #f0f0f0;
+            color: red;
+        }
+        .container1 {
+            width: 90%;
+            height: auto;
+            max-width: 900px;
+            margin: 80px auto 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .account {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dotted black;
+            padding-bottom: 10px;
+        }
+        .account img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .options1 {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .option1 {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .option1:hover {
+            color: #FFD700;
+        }
+        .infoID, .container2 {
+            margin-top: 20px;
+        }
+        .infos {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .infos span {
+            font-weight: bold;
+        }
+        .profil-sub-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .upload {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .upload span {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .button1 {
+            display: block;
+            width: 150px;
+            height: 50px;
+            margin: 20px auto;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button1:hover {
+            background-color: #218838;
+        }
+        .passwordContainer {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+            margin-left: 300px;
+        }
+        .passwordField {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .passwordField label {
+            font-weight: 500;
+            color: #333;
+        }
+        .passwordField input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .passwordField input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        .button2 {
+            background-color: rgba(0, 128, 0, 0.897);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+            margin-left: 80px;
+        }
+        .button2:hover {
+            background-color: green;
+        }
+        #projectName:hover{
+            color: black;
+        }
+        
+  </style>
+ </head>
+ <body>
+  <div class="header">
+   <div class="container">
+    <div class="headerchoices" id="projectName">
+     MyLibrary
+    </div>
+    <a class="headerchoices" href="feedbackuser.html">
+     Feedback
+    </a>
+    <a class="headerchoices" href="bookHistoryUser.html" id="borrowingHistory">
+     Borrowing history
+    </a>
+    <a class="headerchoices" href="main3.html" id="books">
+     Books
+    </a>
+    <div class="user">
+     <div class="profilIcon">
+      <img class="imagee" id="imagee" height="50" width="50"/>
+     </div>
+     <div class="container">
+      <div class="username" id="welcome-message">
+      
+      </div>
+      <div class="options">
+       <a class="option" href="accountSettings.html">
+        Account
+       </a>
+       <a class="option" href="login.html">
+        Log-out
+       </a>
+        </div>
+        </div>
+        </div>
+    </div>
+  </div>
+  <div class="container1">
+   <div class="account">
+    <img alt="Account Icon" height="40" src="List.png" width="40">
+    <h3>
+        Account
+       </h3>
+   </div>
+   <div class="options1">
+    <div class="option1" id="basicInfoBtn">
+     Basic Infos
+    </div>
+    <div class="option1" id="imageBtn">
+     Image
+    </div>
+    <div class="option1" id="passwordBtn">
+     Password
+    </div>
+   </div>
+   <div class="infoID">
+    <div class="infos">
+     <span>
+      Name:
+     </span>
+     <span id="Name">
+      
+     </span>
+    </div>
+    <div class="infos">
+     <span>
+      Passport ID:
+     </span>
+     <span id="passportId">
+      
+     </span>
+    </div>
+    <div class="infos">
+     <span>
+      Gender:
+     </span>
+     <span id="gender">
+      
+     </span>
+    </div>
+    <div class="infos">
+     <span>
+      Major:
+     </span>
+     <span id="major">
+      
+     </span>
+    </div>
+    <div class="infos">
+     <span>
+      Student ID:
+     </span>
+     <span id="studentId">
+      
+     </span>
+    </div>
+   </div>
+   <div class="container2 hidden">
+    <div class="profil-sub-container" id="profileImage" style="background-image: url('https://placehold.co/200x200?text=Profile+Image');">
+    </div>
+    <div class="upload">
+     <span>
+      Choose an image:
+     </span>
+     <input accept="image/*" id="imageUpload" type="file"/>
+    </div>
+    <button class="button1" id="saveButton">
+     Save
+    </button>
+   </div>
+   <div class="passwordContainer hidden">
+    <div class="passwordField">
+     <label for="newPassword">
+      Enter New Password:
+     </label>
+     <input id="newPassword" type="password"/>
+    </div>
+    <div class="passwordField">
+     <label for="confirmPassword">
+      Re-enter New Password:
+     </label>
+     <input id="confirmPassword" type="password"/>
+    </div>
+    <button class="button2" id="savePasswordButton">
+     Save Password
+    </button>
+   </div>
+  </div>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+          
+            
+            const userInfo = JSON.parse(localStorage.getItem('loggedInUser '));
+            
+            if (userInfo) {
+                const welcomeMessage = document.getElementById('welcome-message');
+                welcomeMessage.textContent = userInfo.username;
+                document.getElementById('Name').textContent = userInfo.username || 'N';
+                document.getElementById('passportId').textContent = userInfo.passport || 'N';
+                document.getElementById('gender').textContent = userInfo.gender || 'N';
+                document.getElementById('major').textContent = userInfo.major || 'N';
+                document.getElementById('studentId').textContent = userInfo.userId || 'N';
+            } else {
+                console.log('No user is logged in.');
+            }
+            const userProfileData = JSON.parse(localStorage.getItem(`userProfileData_${userInfo.userId}`));
+            const imageElement = document.getElementById("imagee");
+
+           
+            if (userProfileData && userProfileData.imageUrl) {
+                imageElement.src = userProfileData.imageUrl; 
+            } else {
+                imageElement.src = 'path/to/default-image.jpg';
+            }
+            const infoID = document.querySelector('.infoID');
+            const container2 = document.querySelector('.container2');
+            const passwordContainer = document.querySelector('.passwordContainer');
+            const basicInfoBtn = document.getElementById('basicInfoBtn');
+            const imageBtn = document.getElementById('imageBtn');
+            const passwordBtn = document.getElementById('passwordBtn');
+            infoID.style.display = "block";
+            container2.style.display = "none";
+            passwordContainer.style.display = "none";
+        
+            basicInfoBtn.addEventListener("click", function() {
+                infoID.style.display = "block";
+                container2.style.display = "none";
+                passwordContainer.style.display = "none";
+            });
+        
+            imageBtn.addEventListener("click", function() {
+                infoID.style.display = "none";
+                container2.style.display = "block";
+                passwordContainer.style.display = "none";
+            });
+            passwordBtn.addEventListener("click", function(){
+                infoID.style.display = "none";
+                container2.style.display = "none";
+                passwordContainer.style.display = "block";
+            })
+
+            
+            
+    
+        
+            const savedUser_Data = JSON.parse(localStorage.getItem('userProfileData'));
+            if (savedUser_Data) {
+             
+                if (savedUser_Data.userId === userInfo.userId && savedUser_Data.username === userInfo.username) {
+                    document.getElementById('profileImage').style.backgroundImage = `url(${savedUser_Data.imageUrl})`;
+                }
+            }
+    
+        
+            const imageUpload = document.getElementById('imageUpload');
+            const saveButton = document.getElementById('saveButton');
+    
+            imageUpload.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) { 
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageUrl = e.target.result;
+    
+                       
+                        document.getElementById('profileImage').style.backgroundImage = `url(${imageUrl})`;
+    
+                       
+                        imageUpload.dataset.imageUrl = imageUrl;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload a valid image file.');
+                }
+            });
+            
+    
+         
+            saveButton.addEventListener('click', function() {
+                const imageUrl = imageUpload.dataset.imageUrl; 
+                if (imageUrl) {
+                    
+                    const userProfileData = {
+                        userId: userInfo.userId, 
+                        username: userInfo.username, 
+                        imageUrl: imageUrl
+                    };
+            
+                  
+                    localStorage.setItem(`userProfileData_${userInfo.userId}`, JSON.stringify(userProfileData));
+                    alert('Profile image saved successfully!');
+                } else {
+                    alert('Please upload an image before saving.');
+                }
+            });
+        });
+        document.getElementById('savePasswordButton').addEventListener('click', function() {
+            const userInfo = JSON.parse(localStorage.getItem('loggedInUser '));
+
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return; 
+            }
+        
+            
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+        
+           
+            if (!userInfo) {
+                alert('No user is logged in.');
+                return; 
+            }
+        
+           
+            console.log('Logged in userId:', userInfo.userId);
+        
+            const userKey = Object.keys(users).find(key => users[key].id === userInfo.userId);
+        
+            
+            if (!userKey) {
+                console.log('User  not found in users list:', users);
+                alert('User  not found in the users list.');
+                return; 
+            }
+        
+            
+            users[userKey].password = newPassword;
+        
+           
+            localStorage.setItem('users', JSON.stringify(users));
+        
+            
+            userInfo.password = newPassword;
+            localStorage.setItem('loggedInUser     ', JSON.stringify(userInfo));    
+        
+            alert('Password has been updated successfully!');
+        })
+    </script>
+</body>
+</html>

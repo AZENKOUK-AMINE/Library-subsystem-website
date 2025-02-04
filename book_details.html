@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="book_details.css">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .book-details {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: auto;
+           
+            margin: auto;
+        }
+        
+        .book-details img {
+            width: 300px;
+            height: 500px;
+            border-radius: 8px;
+        }
+        
+        .book-info {
+            margin-top: 20px;
+        }
+        
+        h1, h2 {
+            margin: 0;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 20px;
+            color: #555;
+        }
+        
+        p {
+            color: #666;
+            
+        }
+        
+        .b1 {
+            background-color: rgba(0, 128, 0, 0.719);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;              
+            align-items: center;
+  
+        }
+        label{
+            font-weight: bolder;
+        }
+        
+        .b1:hover {
+            background-color: green;
+        }
+        
+        #reservation-form {
+            margin-top: 50px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            
+        }
+        #Enter-Reservation-Details{
+            margin-left: 70px;
+        }
+        
+        #reservation-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        #reservation-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #confirm-reservation, #cancel-reservation {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 40px;
+            
+        }
+        #cancel-reservation{
+            background-color: rgba(255, 0, 0, 0.863);
+        }
+        
+        #confirm-reservation:hover {
+            background-color: #218838;
+        }
+        #cancel-reservation:hover{
+            background-color:red ;
+        }
+        
+        #reservation-details {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto; 
+            
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .success-icon {
+            font-size: 50px; 
+            color: #28a745; 
+        }
+    </style>
+</head>
+<body>
+    <div class="book-details">
+        <img src="" alt="" id="book-image"> 
+        <div class="book-info">
+            <h1 id="book-title"></h1>
+            <h2 id="book-author"></h2>
+            <p id="book-description"></p>
+            <div id="reservation-form" style="display: none;">
+                <h3 id="Enter-Reservation-Details">Enter Reservation Details</h3>
+                <label for="start-time">Start Time:</label>
+                <input type="datetime-local" id="start-time" required>
+                <br>
+                <label for="end-time" >End Time:</label>
+                <input type="datetime-local" id="end-time" required>
+                <br>
+                <button id="confirm-reservation">Confirm Reservation</button>
+                <button id="cancel-reservation">Cancel</button>
+            </div>
+            
+        </div>
+        <button class="b1" id="reserve-button">Reserve</button>
+    </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="success-icon">✔️</div>
+            <h2>Success!</h2>
+            <p>The borrowing is successful. Check the borrowing history page for more details.</p>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        const bookTitle = getQueryParam('title');
+        const startTime = getQueryParam('startTime');
+        const endTime = getQueryParam('endTime');
+    
+       
+        function fetchBooksFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('books')) || [];
+        }
+    
+    
+        const books = fetchBooksFromLocalStorage();
+        const book = books.find(b => b.title.toLowerCase() === decodeURIComponent(bookTitle).toLowerCase());
+    
+        if (book) {
+            document.getElementById('book-title').textContent = `Title: ${book.title}`;
+            document.getElementById('book-author').textContent = `Author: ${book.author}`;
+            document.getElementById('book-description').textContent = `Description: ${book.description}`;
+            document.getElementById('book-image').src = book.image;
+            document.getElementById('book-image').alt = book.title;
+            if (startTime) {
+                document.getElementById('start-time').value = decodeURIComponent(startTime);
+            }
+            if (endTime) {
+                document.getElementById('end-time').value = decodeURIComponent(endTime);
+            }
+        } else {
+            document.querySelector('.book_details').innerHTML = '<p class="not-found">Book not found.</p>';
+        }
+    
+        document.getElementById('reserve-button').addEventListener('click', function() {
+            document.getElementById('reservation-form').style.display = 'block';
+            document.getElementById('reserve-button').style.display = 'none';
+        });
+    
+        document.getElementById('confirm-reservation').addEventListener('click', function() {
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+    
+            if (startTime && endTime) {
+                const loggedInUser  = JSON.parse(localStorage.getItem('loggedInUser '));
+                const book = {
+                    title: document.getElementById('book-title').textContent.replace('Title: ', ''),
+                    author: document.getElementById('book-author').textContent.replace('Author: ', ''),
+                    description: document.getElementById('book-description').textContent.replace('Description: ', ''),
+                    image: document.getElementById('book-image').src,
+                    startTime: startTime,
+                    endTime: endTime,
+                    studentName: loggedInUser.username  ? loggedInUser.username : 'Unknown',
+                    studentId: loggedInUser.userId  ? loggedInUser.userId : 'Unknown',
+                };
+    
+                let reservedBooks = JSON.parse(localStorage.getItem('reservedBooks')) || []; 
+                reservedBooks.push(book);
+                localStorage.setItem('reservedBooks', JSON.stringify(reservedBooks)); 
+    
+                document.getElementById('successModal').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = 'main3.html'; 
+                }, 3000); 
+            } else {
+                alert('Please enter both start and end times.');
+            }
+        });
+    
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+        document.getElementById('cancel-reservation').addEventListener('click', function() {
+            window.location.href = 'main3.html';
+        })
+    </script>
+</body>
+</html>
